@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="email"], 
+        input[type="file"], 
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        input[type="email"]:focus,
+        input[type="file"]:focus,
+        button:hover {
+            border-color: #4CAF50;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:active {
+            background-color: #3e8e41;
+        }
+
+        .loading    {
+            display: none;
+            text-align: center;
+            color: #555;
+        }
+
+        .success {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 16px;
+            display: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Upload Your File</h1>
+        
+        <form id="uploadForm" enctype="multipart/form-data">
+            <!-- Email Input -->
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+        
+            <!-- File Upload Input -->
+            <label for="fileUpload">Upload File (PNG, JPG, DOC):</label>
+            <input type="file" id="fileUpload" name="fileUpload" accept=".png, .jpg, .jpeg, .doc, .docx" required>
+        
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        
+            <!-- Loading Message -->
+            <div class="loading" id="loadingMessage">Loading...</div>
+            
+            <!-- Success Message -->
+            <div class="success" id="successMessage">
+                We will reply to you shortly...
+            </div>
+            
+            <!-- Error Message -->
+            <div class="error" id="errorMessage">An error occurred. Please try again.</div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const email = document.getElementById('email').value;
+            const fileInput = document.getElementById('fileUpload').files[0];
+            const loadingMessage = document.getElementById('loadingMessage');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Clear previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            loadingMessage.style.display = 'none';
+
+            // Check if email and file are provided
+            if (!email || !fileInput) {
+                errorMessage.textContent = 'Please provide both an email and a file.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Show the loading message
+            loadingMessage.style.display = 'block';
+
+            // Create a FormData object to store the form data
+            const formData = new FormData();
+            formData.append('email', email);
+            formData.append('fileUpload', fileInput);
+
+            // Send the form data to the server
+            fetch('/file-upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide the loading message
+                loadingMessage.style.display = 'none';
+                // Show the success message
+                successMessage.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Hide the loading message
+                loadingMessage.style.display = 'none';
+                // Show the error message
+                errorMessage.textContent = 'An error occurred. Please try again.';
+                errorMessage.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
