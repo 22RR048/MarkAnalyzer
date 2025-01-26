@@ -6,7 +6,7 @@
         Anshika Satish - Viswajyothi College of Engineering and Technology
         Arya Vijayakumar - Viswajyothi College of Engineering and Technology
 Hosted Project Link:
-(MarkAnalyzer):[https://github.com/22RR048/MarkAnalyzer/tree/master]
+(MarkAnalyzer):[https://22rr048.github.io/MarkAnalyzer/]
 
 ## Project Description:
    MarkAnalyzer is an innovative tool that transforms academic marks into valuable insights. It identifies trends, tracks performance, and provides personalized feedback. Designed for both students and educators, it improves learning and decision-making, making the academic evaluation process more transparent and effective.
