@@ -91,10 +91,10 @@ This project includes both front-end and back-end components:
     Special thanks to the documentation of HTML, CSS, and JavaScript for making web development accessible.
 
 ## Screenshots:
-![alt text](Markanalyzer_frontend-2.jpg)
+![Markanalyzer_frontend-2](https://github.com/user-attachments/assets/a05d69b5-4de2-4117-a319-9d05fa83f1c4)
 
 ## Diagram!
-![alt text](<Screenshot 2025-01-26 224019.png>)
+![Screenshot 2025-01-26 224019](https://github.com/user-attachments/assets/aaa86621-0df5-4485-9cb0-5fb9ffa0f685)
 
 ## Team Contributions:
     Anshika Satish: Research, testing, and reviewing the implementation. Provided feedback and suggestions for improvements.
